@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Display</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <style>
+        .detailsContainer{
+            position:relative;
+            top: 0px;
+            animation: container 1.1s ease-out 1;
+        }
+
+        @keyframes container {
+            0% {
+                top: -70px;
+                opacity: 0;
+            }
+
+            100% {
+                top: 0px;
+                opacity: 1;
+            }
+        }
+
+    </style>
+</head>
+<body class="bg-info">
+
+        <div class="row align-items-center" style="height: 100vh">
+        <div class="col-md-6 mx-auto shadow py-3 bg-light detailsContainer text-center">
+            <div class="h1 text-primary">Form Details</div>
+        <div id="formDetails"></div>
+        </div>
+    </div>
+
+    <script>
+        var data = window.location.search;
+        var params = new URLSearchParams(data);
+        var detailsContainer = document.getElementById("formDetails");
+
+
+        var fields = ["first Name", "last Name", "email", "password","phone Number", "adhaar Number", "gender", "date of birth", "address","pin Code"];
+
+        fields.forEach(function(field) {
+
+            var value = params.get(field);
+            var paragraph = document.createElement("p");
+            
+            if(field=="password") {
+                var psValue = value.substr(-2);
+                var pvalue= psValue.padStart(field.length,"x");   
+                paragraph.textContent = field.charAt(0).toUpperCase() + field.slice(1) + " : " + pvalue;
+                detailsContainer.appendChild(paragraph);
+            }
+
+            else {
+                paragraph.textContent = field.charAt(0).toUpperCase() + field.slice(1) + " : " + value;
+                detailsContainer.appendChild(paragraph);
+            } 
+        });
+        
+
+
+    </script>
+</body>
+</html>
