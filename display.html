@@ -30,13 +30,15 @@
     </style>
 </head>
 <body class="bg-info">
-
-        <div class="row align-items-center" style="height: 100vh">
-        <div class="col-md-6 mx-auto shadow py-3 bg-light detailsContainer text-center">
-            <div class="h1 text-primary">Form Details</div>
-        <div id="formDetails"></div>
+        <div class="container">
+            <div class="row align-items-center" style="height: 100vh">
+                <div class="col-md-6 mx-auto shadow py-3 bg-light detailsContainer text-center">
+                    <div class="h1 text-primary">Form Details</div>
+                <div id="formDetails"></div>
+                </div>
+            </div>
         </div>
-    </div>
+        
 
     <script>
         var data = window.location.search;
@@ -57,13 +59,11 @@
                 paragraph.textContent = field.charAt(0).toUpperCase() + field.slice(1) + " : " + pvalue;
                 detailsContainer.appendChild(paragraph);
             }
-
             else {
                 paragraph.textContent = field.charAt(0).toUpperCase() + field.slice(1) + " : " + value;
                 detailsContainer.appendChild(paragraph);
             } 
-        });
-        
+        });  
 
 
     </script>

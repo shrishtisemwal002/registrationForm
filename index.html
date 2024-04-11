@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
         * {
@@ -14,6 +17,7 @@
             padding: 0;
             box-sizing: border-box;
         }
+
         .image,
         .form {
             opacity: 1;
@@ -29,8 +33,15 @@
                 opacity: 1;
             }
         }
+
         textarea {
             resize: none;
+        }
+
+        .eyeIcon {
+            border: 1px solid rgb(224, 220, 220);
+            cursor: pointer;
+            align-items: center;
         }
     </style>
 
@@ -47,40 +58,70 @@
             </div>
 
             <div class="col-md-6 form">
-                <form action="display.html" method="GET" name="myForm" onsubmit="return validateForm()" class="shadow rounded py-4 h-100 px-4" id="registrationForm">
+
+                <!-- Registration Form -->
+                <form action="display.html" method="GET" name="myForm" onsubmit="return validateForm()"
+                    class="shadow rounded py-4 h-100 px-4" id="registrationForm">
 
                     <div class="row">
                         <div class="mb-3 col">
+
+                            <!-- First Name -->
                             <div>
                                 <input type="text" class="form-control" id="firstName" placeholder="First Name" name="first Name" oninput="return validateForm()" />
                                 <p class="text-danger px-2" id="invalidFirstName"></p>
                             </div>
                         </div>
-                         <div class="mb-3 col">
+
+                        <div class="mb-3 col">
+                            <!-- Last Name -->
                             <div>
                                 <input type="text" class="form-control" id="lastName" placeholder="Last Name" name="last Name" oninput="return validateForm()" />
                                 <p class="text-danger px-2" id="invalidLastName"></p>
                             </div>
                         </div>
+
                     </div>
 
                     <div class="row">
+
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="inputEmail" placeholder="Enter Email" name="email" oninput="return validateForm()"/>
+                            <!-- Email -->
+                            <input type="text" class="form-control" id="inputEmail" placeholder="Enter Email" name="email" oninput="return validateForm()" />
                             <p class="text-danger px-2" id="invalidEmail"></p>
                         </div>
+
                     </div>
 
                     <div class="row">
+
                         <div class="mb-3 col">
+
                             <div>
-                                <input type="password" class="form-control" id="password" placeholder="Password" name="password" oninput="return validateForm()"  />
+                                <!-- Password -->
+                                <div class="input-group">
+
+                                    <input type="password" class="form-control" id="password" placeholder="Password" name="password" oninput="return validateForm()" />
+                                    <span class="eyeIcon px-2 py-2" onclick="return showPassword('password')">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </span>
+
+                                </div>
                                 <p class="text-danger px-2" id="invalidPassword"></p>
                             </div>
+
                         </div>
                         <div class="mb-3 col">
                             <div>
-                                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" name="confirm password" oninput="return validateForm()"/>
+                                <!-- Confirm Password -->
+                                <div class="input-group">
+
+                                    <input type="password" class="form-control" id="confirmPassword"placeholder="Confirm Password" name="confirm password" oninput="return validateForm()" />
+                                    <span class="eyeIcon px-2 py-2" onclick="return showPassword('password')">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </span>
+
+                                </div>
                                 <p class="text-danger px-2" id="confirmPasswordMatch"></p>
                             </div>
                         </div>
@@ -89,64 +130,85 @@
                     <div class="row">
                         <div class="mb-3 col">
                             <div>
+                                <!-- Phone Number -->
                                 <input type="text" class="form-control" id="phoneNumber" placeholder="Phone Number" name="phone Number" oninput="return validateForm()" />
                                 <p class="text-danger px-2" id="invalidPhoneNumber"></p>
                             </div>
                         </div>
                         <div class="mb-3 col">
                             <div>
+                                <!-- Adhaar Number -->
                                 <input type="text" class="form-control" id="adhaarNumber" placeholder="Adhaar Number" name="adhaar Number" oninput="return validateForm()" />
-                                    <p class="text-danger px-2" id="invalidAdhaarNumber"></p>
+                                <p class="text-danger px-2" id="invalidAdhaarNumber"></p>
                             </div>
                         </div>
                     </div>
 
                     <div class="row mb-3">
-                        <label for="gender" class="col-sm-2">Gender</label>
+                        <!-- Gender -->
+                        <label for="gender" class="col-sm-2" id="gender">Gender</label>
                         <div class="form-check form-check-inline col-sm-2">
-                            <input class="form-check-input" type="radio" name="gender" id="male" value="male">
+
+                            <input class="form-check-input" type="radio" name="gender" id="male" value="male" oninput="return validateForm()">
                             <label class="form-check-label" for="male">Male</label>
+
                         </div>
                         <div class="form-check form-check-inline col-sm-2">
-                            <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+
+                            <input class="form-check-input" type="radio" name="gender" id="female" value="female" oninput="return validateForm()">
                             <label class="form-check-label" for="female">Female</label>
+
                         </div>
                         <div class="form-check form-check-inline col-sm-2">
-                            <input class="form-check-input" type="radio" name="gender" id="other" value="other">
+
+                            <input class="form-check-input" type="radio" name="gender" id="other" value="other" oninput="return validateForm()">
                             <label class="form-check-label" for="other">Other</label>
+
                         </div>
+                        <p class="text-danger p3-2" id="invalidGender"></p>
                     </div>
 
                     <div class="row mb-3">
+
+                        <!-- Date Of Birth -->
                         <label for="dob" class="col-sm-2 col-form-label">Date of Birth</label>
                         <div class="col-sm-5">
-                            <input type="date" class="form-control" id="dob" name="date of birth" />
+                            <input type="date" class="form-control" id="dob" name="date of birth" oninput="return validateForm()" />
                             <p class="text-danger px-2" id="invalidDOB"></p>
                         </div>
+
                     </div>
 
                     <div class="row mb-3">
+
+                        <!-- Address -->
                         <label for="address" class="col-sm-2 form-label">Address</label>
                         <div class="col-sm-5">
-                        <textarea class="form-control" id="address" rows="3" name="address" oninput="return validateForm()"></textarea>
 
-                        <p class="text-danger px-2" id="invalidAddress"></p>
+                            <textarea class="form-control" id="address" rows="3" name="address" oninput="return validateForm()"></textarea>
+
+                            <p class="text-danger px-2" id="invalidAddress"></p>
+
                         </div>
 
                         <div class="col-sm-4">
-                            <input type="text" class="form-control" id="pinCode" name="pin Code" placeholder="Pin Code" oninput="return validateForm()"/>
+                            <!-- Pincode -->
+                            <input type="text" class="form-control" id="pinCode" name="pin Code" placeholder="Pin Code" oninput="return validateForm()" />
                             <p class="text-danger px-2" id="invalidPinCode"></p>
                         </div>
                     </div>
 
-                        <div class="d-flex justify-content-center p-5">
-                            <input type="submit" value="submit" class="btn btn-primary mx-5">
-                        </div>
+                    <!-- Submit Button -->
+                    <div class="d-flex justify-content-center p-5">
+                        <input type="submit" value="submit" class="btn btn-primary mx-5">
+                    </div>
+
                 </form>
             </div>
         </div>
     </div>
 
+    <!-- JavaScript File for validation -->
     <script src="./script.js"></script>
 
 </body>
