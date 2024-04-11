@@ -1,13 +1,26 @@
+// window.onload = function() {
+//     clearForm();
+// };
+
+window.addEventListener("pageshow", function(event) {
+
+    if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+        clearForm();
+    }
+
+});
 
 function validateForm() {
-    var registrationForm = document.getElementById("registrationForm").value;
+    debugger;
     var firstName = document.getElementById("firstName").value;
     var lastName = document.getElementById("lastName").value;
+    var email = document.getElementById("inputEmail").value;
     var password = document.getElementById("password").value;
     var confirmPassword = document.getElementById("confirmPassword").value;
     var phoneNumber = document.getElementById("phoneNumber").value;
     var adhaarNumber = document.getElementById("adhaarNumber").value;
-    var address = document.querySelector('textarea[name="address"]')
+    var gender = document.querySelector('input[name="gender"]').value;
+    var address = document.getElementById("address").value;
     var pinCode = document.getElementById("pinCode").value;
 
     var isValid = true;
@@ -29,6 +42,15 @@ function validateForm() {
     } else {
         document.getElementById("lastName").style.border = "none";
         document.getElementById("invalidLastName").innerHTML = "";
+    } 
+
+    if(!validEmail(email)) {
+        document.getElementById("inputEmail").style.border = "1px solid red";
+        document.getElementById("invalidEmail").innerHTML = "Invalid Email";
+        isValid = false;
+    }else {
+        document.getElementById("inputEmail").style.border = "none";
+        document.getElementById("invalidEmail").innerHTML = "";
     } 
 
     //if(!isValidPassword(password)){
@@ -72,7 +94,7 @@ function validateForm() {
 
     if(address.length == 0) {
         document.getElementById("address").style.border = "1px solid red";
-        document.getElementById("invalidAddress").innerHTML = "Enter Address";
+        document.getElementById("invalidAddress").innerHTML = "Please Enter Address";
         isValid = false;
     } else {
         document.getElementById("address").style.border = "none";
@@ -88,10 +110,14 @@ function validateForm() {
         document.getElementById("pinCode").style.border = "none";
         document.getElementById("invalidPinCode").innerHTML = "";
     }
-
+    
     return isValid;
 }
 
+function clearForm() {
+    // Reset the form
+    document.getElementById("registrationForm").reset();
+}
 
 function isString(str) {
     var flag = true;
@@ -103,6 +129,33 @@ function isString(str) {
         }
     }
     return flag;
+}
+
+function validEmail(email) {
+    let atIndex = email.indexOf("@");
+    if(email.length == 0) {
+        return false;
+    }
+    if(atIndex == -1 || atIndex == 0 || atIndex == email.length-1) {
+        return false;
+    }
+    if(email.includes("@",atIndex+1)) {
+        return false;
+    }
+
+    if(email.indexOf(".") == -1 || email.indexOf(".") == email.length-1) {
+        return false;
+    }
+
+    if(email.includes("..")){
+        return false;
+    }
+
+    if((email.indexOf(".") +1) == atIndex) {
+        return false;
+    }
+
+    return true;
 }
 
 function isValidPassword(password) {
@@ -135,6 +188,11 @@ function isStringReg(str) {
 
 }
 
+function validEmailReg(email) {
+    var regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return regex.test(email);
+}
+
 function isValidPasswordReg(password) {
     var regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
     return regex.test(password);
@@ -155,8 +213,5 @@ function validPinCode(pinCode) {
     return regex.test(pinCode);
 }
 
-function clear() {
-    registrationForm.reset();
-}
 
 
